@@ -1,9 +1,30 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { Link } from 'expo-router';
-import { Redirect } from 'expo-router';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import app from '../constants/firebaseConfig'; // default import olarak düzelttim
 
+import { useState } from 'react';
 
 export default function AuthIndex() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleLogin = () => {
+    const auth = getAuth(app);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("Giriş başarılı!", user);
+        router.replace('/(tabs)');
+      })
+      .catch((error) => {
+        console.error('Firebase Error:', error.code, error.message);
+        Alert.alert("Hata", `Giriş başarısız: ${error.message}`);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hoş Geldiniz</Text>
@@ -13,19 +34,21 @@ export default function AuthIndex() {
         style={styles.input}
         placeholder="E-posta"
         keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Şifre"
         secureTextEntry
+        value={password}
+        onChangeText={setPassword}
       />
 
       {/* Giriş Yap */}
-      <Link href="/(tabs)" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Giriş Yap</Text>
-        </TouchableOpacity>
-      </Link>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Giriş Yap</Text>
+      </TouchableOpacity>
 
       {/* Kayıt Ol */}
       <Link href="/auth/register" asChild>
@@ -33,10 +56,10 @@ export default function AuthIndex() {
           <Text style={styles.signupText}>Kayıt Ol</Text>
         </TouchableOpacity>
       </Link>
-
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -79,3 +102,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
