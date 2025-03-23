@@ -30,11 +30,11 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-           {/* İlk açılışta auth ekranı gözüksün */}
-      <Stack.Screen name="auth/index" options={{ headerShown: false }} />
-      {/* Diğer ekranlar */}
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
+        {/* İlk açılışta sadece auth gözüksün */}
+        <Stack.Screen name="auth" options={{ headerShown: false }} />
+        {/* Ana sayfa sadece giriş sonrası gösterilecek */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

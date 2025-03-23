@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { router, Link } from 'expo-router';
+import { Link } from 'expo-router';
+import { Redirect } from 'expo-router';
+
 
 export default function AuthIndex() {
   return (
