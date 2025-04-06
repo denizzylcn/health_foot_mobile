@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import app from '../constants/firebaseConfig'; // default import olarak düzelttim
+import { login } from '../../services/authService';
+
+
 
 import { useState } from 'react';
 
@@ -10,20 +11,19 @@ export default function AuthIndex() {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = () => {
-    const auth = getAuth(app);
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log("Giriş başarılı!", user);
+  
+    const handleLogin = async () => {
+      try {
+        const response = await login({ email, password });
+        console.log('API Giriş başarılı:', response);
         router.replace('/(tabs)');
-      })
-      .catch((error) => {
-        console.error('Firebase Error:', error.code, error.message);
+      } catch (error: any) {
+        console.error('API Giriş hatası:', error);
         Alert.alert("Hata", `Giriş başarısız: ${error.message}`);
-      });
-  };
+      }
+    };
+    
+  
 
   return (
     <View style={styles.container}>
