@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:5130/api/Auth';
 export const login = async (data: { email: string; password: string }) => {
   const response = await axios.post(`${API_URL}/login`, {
     email: data.email,
-    passwordHash: data.password, // Backend'de şifre passwordHash alanında bekleniyor
+    passwordHash: data.password , // Backend'de şifre passwordHash alanında bekleniyor
   });
   return response.data;
 };
