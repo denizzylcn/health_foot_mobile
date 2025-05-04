@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5130/api', // Burayı API adresine göre güncelle
+  baseURL: 'http://192.168.1.12:5130/api', 
 });
 
 export const setAuthToken = (token: string | null) => {
@@ -11,6 +11,7 @@ export const setAuthToken = (token: string | null) => {
   } else  {
     delete API.defaults.headers.common['Authorization'];
   }
+  
 };
 
 export default API;

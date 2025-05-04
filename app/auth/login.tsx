@@ -1,22 +1,28 @@
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { login } from '../../services/authService';
-
+import { login } from '../../services/authService'; // Firebase login fonksiyonun burada olacak
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
-  const [passwordHash, setPasswordHash] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await login({ email, password: passwordHash });
-      Alert.alert('Giriş başarılı!', '🎉 Hoş geldiniz!');
-      router.replace('/'); // Başarılı girişten sonra yönlendirme yapılır
-    } catch (error) {
-      Alert.alert('Hata', 'Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.');
+      const user = await login({ email, password });
+      if (user) {
+        const token = await user.getIdToken(); // Kullanıcının idToken'ını alıyoruz
+        console.log('Giriş başarılı, token:', token);
+  
+        Alert.alert('Giriş başarılı!', '🎉 Hoş geldiniz!');
+        router.replace('/(tabs)'); // Ana ekrana yönlendirme
+      }
+    } catch (error: any) {
+      console.log('Giriş hatası:', error);
+      Alert.alert('Hata', error.message || 'Giriş yapılamadı.');
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -27,13 +33,14 @@ const LoginScreen = () => {
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
+        keyboardType="email-address"
       />
       <TextInput
         placeholder="Şifre"
         style={styles.input}
         secureTextEntry
-        value={passwordHash}
-        onChangeText={setPasswordHash}
+        value={password}
+        onChangeText={setPassword}
       />
       <Button title="Giriş Yap" onPress={handleLogin} />
     </View>
@@ -63,3 +70,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+
+
+
+

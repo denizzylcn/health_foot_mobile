@@ -1,9 +1,6 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, Dimensions, Pressable, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
-
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -15,8 +12,7 @@ const services = [
   { title: 'Topuk Çatlağı Bakımı', icon: 'water-outline' },
 ];
 
-
-export default function HomeScreen() {
+export default function TabsIndexScreen() {  // <-- işte burayı default yaptım
   return (
     <ScrollView contentContainerStyle={[styles.container, { flexGrow: 1 }]}>
       {/* Logo */}
