@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import { login } from '../../services/authService';
+import { login } from '../services/authService';
 
 
 

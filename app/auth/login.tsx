@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { login } from '../../services/authService'; // Firebase login fonksiyonun burada olacak
+import { login } from '../services/authService'; // Firebase login fonksiyonun burada olacak
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
