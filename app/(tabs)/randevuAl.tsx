@@ -20,6 +20,8 @@ export default function RandevuAl() {
       aciklama
     };
 
+     console.log('Gönderilen veri:', veri);
+
     try {
       await RandevuService.randevuAl(veri);
       Alert.alert('🎉 Başarılı', 'Randevu oluşturuldu!');

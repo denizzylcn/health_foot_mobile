@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Kalıcılık tanımı burada yapılmazsa, sadece oturum anlık olur ama hata da çıkmaz
+
 const firebaseConfig = {
   apiKey: "AIzaSyDRrVapcd8AfGQgYouzlhdInTsGeqBwmpc",
   authDomain: "healthfootapp.firebaseapp.com",
@@ -12,8 +14,7 @@ const firebaseConfig = {
   measurementId: "G-CKW0YPQS1H"
 };
 
-// Firebase'i başlatıyoruz
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); // initializeAuth yerine getAuth kullanılır
 
-// Authentication'ı oluşturup dışa aktarıyoruz
-export const auth = getAuth(app);
+export { auth };
