@@ -9,9 +9,14 @@
       "components/*": ["components/*"],
       "constants/*": ["constants/*"],
       "hooks/*": ["app/hooks/*"]
-    }
+    },
+    "types": [] // ❗ Problemli type referanslarını kaldırmak için eklendi
   },
   "include": [
+    "app",
+    "components",
+    "constants",
+    "hooks",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",

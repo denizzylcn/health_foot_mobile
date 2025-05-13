@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://192.168.1.12:5130/api', 
+  baseURL: 'http://192.168.1.8:5130/api', 
 });
 
 export const setAuthToken = (token: string | null) => {

@@ -1,28 +1,28 @@
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
-import { router } from 'expo-router';
-import { login } from '../services/authService'; // Firebase login fonksiyonun burada olacak
+import { useRouter } from 'expo-router'; // 🔄 router yerine useRouter
+import { login } from '@/services/authService'; // ✅ Yol dışarıdaysa böyle olmalı
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter(); // ✅ useRouter kullanımı düzeltildi
 
   const handleLogin = async () => {
     try {
       const user = await login({ email, password });
       if (user) {
-        const token = await user.getIdToken(); // Kullanıcının idToken'ını alıyoruz
+        const token = await user.getIdToken();
         console.log('Giriş başarılı, token:', token);
-  
+
         Alert.alert('Giriş başarılı!', '🎉 Hoş geldiniz!');
-        router.replace('/(tabs)'); // Ana ekrana yönlendirme
+        router.replace('/(tabs)/anasayfa'); // 🌟 Doğrudan yönlendirme route'a
       }
     } catch (error: any) {
       console.log('Giriş hatası:', error);
       Alert.alert('Hata', error.message || 'Giriş yapılamadı.');
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -47,7 +47,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default LoginScreen; // ✅ Eksik olursa "missing default export" hatası verir
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +70,3 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
-
-
-
-
