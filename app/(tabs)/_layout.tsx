@@ -1,11 +1,28 @@
-import { Tabs } from 'expo-router';
+// ✅ app/(tabs)/_layout.tsx
+ import { Tabs, Redirect, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IconSymbol } from 'components/ui/IconSymbol';
 import { HapticTab } from 'components/HapticTab';
 import useColorSchemeCustom from 'hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorSchemeCustom();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem('token');
+      setIsAuthenticated(!!token);
+    };
+
+    checkToken();
+  }, []);
+
+  if (isAuthenticated === null) return null;
+  if (!isAuthenticated) return <Redirect href="/auth/login" />;
 
   return (
     <Tabs
@@ -14,9 +31,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: Platform.select({
-          ios: {
-            position: 'absolute',
-          },
+          ios: { position: 'absolute' },
           default: {},
         }),
       }}

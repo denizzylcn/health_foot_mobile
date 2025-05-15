@@ -1,0 +1,23 @@
+
+[
+  {
+    "id": "medikal-ayak-bakimi",
+    "title": "Medikal Ayak Bak\u0131m\u0131",
+    "coverImage": "https://cdn.pixabay.com/photo/2017/08/02/01/01/foot-2568472_960_720.jpg"
+  },
+  {
+    "id": "tirnak-batmasi",
+    "title": "T\u0131rnak Batmas\u0131",
+    "coverImage": "https://cdn.pixabay.com/photo/2017/08/02/01/01/toe-2568473_960_720.jpg"
+  },
+  {
+    "id": "nasir-temizligi",
+    "title": "Nas\u0131r Temizli\u011fi",
+    "coverImage": "https://cdn.pixabay.com/photo/2016/04/01/10/13/foot-1304654_960_720.jpg"
+  },
+  {
+    "id": "refleksoloji",
+    "title": "Refleksoloji Masaj\u0131",
+    "coverImage": "https://cdn.pixabay.com/photo/2016/03/09/09/30/feet-1245954_960_720.jpg"
+  }
+]
