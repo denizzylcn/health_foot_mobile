@@ -1,14 +1,15 @@
 // ✅ app/(tabs)/_layout.tsx
- import { Tabs, Redirect, useRouter } from 'expo-router';
+import { Tabs, Redirect, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IconSymbol } from 'components/ui/IconSymbol';
 import { HapticTab } from 'components/HapticTab';
-import useColorSchemeCustom from 'hooks/useColorScheme';
+import useColorScheme from 'hooks/useColorScheme';
+ 
 
 export default function TabLayout() {
-  const colorScheme = useColorSchemeCustom();
+  const colorScheme = useColorScheme(); // ✅ artık doğru şekilde çağrılır
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const router = useRouter();
 

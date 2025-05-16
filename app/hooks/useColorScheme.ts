@@ -1,10 +1,7 @@
+import { useColorScheme as useRNColorScheme } from 'react-native';
 
-
-import { useColorScheme } from 'react-native';
-
-export default function useColorSchemeCustom() {
-  return useColorScheme();
+export function useColorSchemeCustom() {
+  return useRNColorScheme();
 }
 
-
-  
+export default useColorSchemeCustom;
